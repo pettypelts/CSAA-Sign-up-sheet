@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Website Sign-Up</title>
+<style>
+   body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffCBCB; 
+  }
+
+  form {
+    width: 70%;
+    margin: 20px auto;
+    background-color: #FFE6E6; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  legend {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+  }
+
+  input, select, textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+  input.invalid, select.invalid, textarea.invalid {
+    border-color: #dc3545;
+  }
+
+  p.output {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #E1AFD1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  button[type="reset"] {
+    background-color: #AD88C6;
+    margin-left: 10px;
+  }
+</style>
+</head>
+<body>
+
+<form id="signupForm" onsubmit="submitForm(event)">
+  <fieldset>
+    <legend>Sign Up</legend>
+    <label for="name">Name</label>
+    <input type="text" id="name" required onblur="validateInput(this)">
+    
+    <label for="username">Preferred Username</label>
+    <input type="text" id="username" required onblur="validateInput(this)">
+    
+    <label for="gender">Gender</label>
+    <select id="gender" required onblur="validateInput(this)">
+      <option value="" disabled selected>Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="prefer not to mention">Prefer not to mention</option>
+    </select>
+    
+    <label for="password">Password</label>
+    <input type="password" id="password" required onblur="validateInput(this)">
+    
+    <label for="email">Email Address</label>
+    <input type="email" id="email" required onblur="validateInput(this)">
+    
+    <label for="address">Address</label>
+    <textarea id="address" rows="4" required onblur="validateInput(this)"></textarea>
+    
+    <label for="interest">Interest</label>
+    <textarea id="interest" rows="4" required onblur="validateInput(this)"></textarea>
+  </fieldset>
+
+  <button type="submit">Submit</button>
+  <button type="reset" onclick="resetForm()">Reset</button>
+</form>
+
+<div id="output" class="output"></div>
+
+<script>
+function submitForm(event) {
+  event.preventDefault();
+  const name = document.getElementById('name').value;
+  const username = document.getElementById('username').value;
+  const gender = document.getElementById('gender').value;
+  const password = document.getElementById('password').value;
+  const email = document.getElementById('email').value;
+  const address = document.getElementById('address').value;
+  const interest = document.getElementById('interest').value;
+
+  const outputDiv = document.getElementById('output');
+  outputDiv.innerHTML = `
+    <h2>Sign-Up Information:</h2>
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Preferred Username:</strong> ${username}</p>
+    <p><strong>Gender:</strong> ${gender}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Address:</strong> ${address}</p>
+    <p><strong>Interest:</strong> ${interest}</p>
+  `;
+}
+
+function resetForm() {
+  document.getElementById('signupForm').reset();
+  document.getElementById('output').innerHTML = '';
+}
+
+function validateInput(input) {
+  if (input.value.trim() === '') {
+    input.classList.add('invalid');
+  } else {
+    input.classList.remove('invalid');
+  }
+}
+</script>
+
+</body>
+</html>
